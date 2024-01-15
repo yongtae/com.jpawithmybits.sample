@@ -104,8 +104,10 @@ public class EgovConfigAppDatasource {
 	@Bean(name = {"dataSource", "egov.dataSource", "egovDataSource"})
 	public DataSource dataSource() {
 		if ("hsql".equals(dbType)) {
-//			return dataSourceHSQL();
-			return basicDataSource();
+//			인메모리 hsql 연결
+			return dataSourceHSQL();
+//			hsql server 연결
+//			return basicDataSource();
 		} else {
 			return basicDataSource();
 		}

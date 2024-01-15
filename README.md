@@ -1,12 +1,13 @@
 # JPA, MyBatis와 동시 사용 셋팅 프로젝트 (DTO/엔티티 분리)
 	주요내용
-		[...] github에 등록
 		[...] 테스트롤백 적용
-		[...] 인메모리 hsqldb, hsqldb server 둘다 연결 가능 셋팅
+		[완] 검증 api 생성, 참고파일: jpa+mybatis 동시 적용 확인.postman_collection.json 
+		[완] github에 등록
+		[완] 인메모리 hsqldb, hsqldb server 둘다 연결 가능 셋팅
 		[완] jpa 설징 및 기반 query crud 적용
 		[완] jpa기반 querydsl적용으로 조회
 		[완] mybatis기반 query crud
-		[완료] maven+lombock 추가
+		[완료] maven+lombock 추가(jpa 활용)
 			참고자료
 				https://baekh-93.tistory.com/59
 

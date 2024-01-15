@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "3a410993-1360-4229-b622-a38c5a15985c",
+		"name": "jpa+mybatis 동시 적용 확인",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "jpa 기반 데이터 조회 api",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyZXF1ZXN0LmdldElkKCkiLCJpYXQiOjE2NzUzMTczODAsImV4cCI6MTY3NTkyMjE4MH0.2uJycJKdetphMPEy9PKuJAafZNJMRuiXd9osLxiQrRXP1mPsWesncNkEY1WhMXS6S6QVCD80bVULt7iB8trKVw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exType\": \"1\",\r\n    \"exType_testData\":\"(사용안함), exType허용값-> 1-dbms에러/2-트랜잭션에러/3-인가에러/4->사용자제어에러/5->알수없는에러\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/sample/test_jpa.do",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"sample",
+						"test_jpa.do"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mybatis 기반 데이터 조회 api",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyZXF1ZXN0LmdldElkKCkiLCJpYXQiOjE2NzUzMTczODAsImV4cCI6MTY3NTkyMjE4MH0.2uJycJKdetphMPEy9PKuJAafZNJMRuiXd9osLxiQrRXP1mPsWesncNkEY1WhMXS6S6QVCD80bVULt7iB8trKVw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exType\": \"1\",\r\n    \"exType_testData\":\"(사용안함), exType허용값-> 1-dbms에러/2-트랜잭션에러/3-인가에러/4->사용자제어에러/5->알수없는에러\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/sample/test_mybatis.do",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"sample",
+						"test_mybatis.do"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

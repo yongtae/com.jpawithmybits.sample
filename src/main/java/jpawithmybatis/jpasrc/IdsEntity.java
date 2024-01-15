@@ -2,7 +2,6 @@ package jpawithmybatis.jpasrc;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@SuperBuilder // MemberEntity.builder() 코드 사용시 적용
+@SuperBuilder // IdsEntity.builder() 코드 사용시 적용
 @Setter // 클래스 생성시 적용
 @Getter // 클래스 생성시 적용
 
@@ -27,5 +26,5 @@ public class IdsEntity {
 
 	@NotNull
 	@Column(name = "NEXT_ID")
-	private String next_id;
+	private Integer next_id;
 }

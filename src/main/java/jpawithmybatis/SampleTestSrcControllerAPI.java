@@ -48,8 +48,10 @@ public class SampleTestSrcControllerAPI {
 		resultMap.put("url", "/sample/test_jpa.do");
 		///////////////////////////////////
 
-		MemberEntity memberEntity = MemberEntity.builder().name("이름").email("test@test.com").build();
-
+		MemberEntity memberEntity = MemberEntity.builder()
+				.idsid(1)
+				.name("이름").email("test@test.com").build();
+		
 		MemberEntity res = memberService.createMember(memberEntity);
 		List<MemberEntity> searchList = memberService.getMembers();
 
@@ -62,7 +64,7 @@ public class SampleTestSrcControllerAPI {
 
 		IdsEntity idsEntity = IdsEntity.builder()
 				.table_name("JPA에서 등록")
-				.next_id("JPA_ID")
+				.next_id(1)
 				.build();
 		IdsEntity res_ids = idsService.IdsInsert(idsEntity);
 		resultMap.put("ids테이블 인서트", res_ids);
@@ -82,11 +84,15 @@ public class SampleTestSrcControllerAPI {
 	@ResponseBody
 	public ResultVO get02() {
 		int cnt2 = 0;
+		int cnt3 = 0;
 
 		// 테스트 실행
 		try {
 			sampleService.sampleLogic();
 			cnt2 = SampleResultVO.getSampleResultVO().getResultcode();
+			
+			sampleService.sampleLogic2();
+			cnt3 = SampleResultVO.getSampleResultVO().getResultcode();
 		} catch (Exception e) {
 			// TODO: handle exception
 			// 결과값 확인, 데이터는 롤백됨
@@ -98,6 +104,7 @@ public class SampleTestSrcControllerAPI {
 		HashedMap resultMap = new HashedMap();
 		resultMap.put("url", "/sample/test_mybatis.do");
 		resultMap.put("selectIdsCnt, IDS 개수", cnt2);
+		resultMap.put("selectIdsTestCnt, IDS_TEST 개수", cnt3);
 
 		resultVO.setResult(resultMap);
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());

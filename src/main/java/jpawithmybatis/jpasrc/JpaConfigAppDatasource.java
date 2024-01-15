@@ -61,6 +61,8 @@ public class JpaConfigAppDatasource {
 	 * @return [dataSource 설정] HSQL 설정
 	 */
 	private DataSource dataSourceHSQL() {
+//		EgovConfigAppDatasource에도 동시에 셋팅되있음
+//		임베디드 1개생성되면 동일하게 연결됨
 		return new EmbeddedDatabaseBuilder()
 			.setType(EmbeddedDatabaseType.HSQL)
 			.setScriptEncoding("UTF8")
@@ -84,8 +86,11 @@ public class JpaConfigAppDatasource {
 	@Bean(name = {"dataSourceJpa"})
 	@Primary //해당 Bean을 우선적으로 선택하도록 하는 annotation
 	public DataSource dataSource() {
-//		return dataSourceHSQL();
-		return basicDataSource();
+//		인메모리 hsql 연결
+		return dataSourceHSQL();
+		
+//		hsql server 연결
+//		return basicDataSource();
 	}
 
 	private static final String DEFAULT_NAMING_STRATEGY
@@ -100,7 +105,8 @@ public class JpaConfigAppDatasource {
 	  Map<String, String> propertiesHashMap = new HashMap<>();
 	  propertiesHashMap.put("hibernate.physical_naming_strategy",DEFAULT_NAMING_STRATEGY);
 	  propertiesHashMap.put("hibernate.show_sql","true");
-	  propertiesHashMap.put("hibernate.hbm2ddl.auto", "create"); // 엔터티 생성 셋팅
+//	  엔터티 생성 셋팅, create(hsql server일떄만 사용)/none
+	  propertiesHashMap.put("hibernate.hbm2ddl.auto", "none"); 
 	  
 	  LocalContainerEntityManagerFactoryBean rep =
 	  builder.dataSource(dataSource())

@@ -20,10 +20,10 @@ import lombok.experimental.SuperBuilder;
 @Entity // 객체와 테이블 매핑
 @Table(name = "IDS_TEST") // 테이블 지정
 public class MemberEntity {
-	@GeneratedValue
+//	@GeneratedValue
 	@Id  // Primary Key 지정
 	@Column(name = "idsid")  // 컬럼 지정
-    private Long idsid;
+    private Integer idsid;
 	
 	@NotNull
 	@Column(name = "name")
