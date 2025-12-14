@@ -2,12 +2,12 @@
 	etc
 		....
 	주요내용
-<<<<<<< HEAD
-		[...] 테스트롤백 적용
-		[...] dockerfile 적용
-=======
-		[...] 테스트롤백 적용---
->>>>>>> branch 'main' of https://github.com/yongtae/com.jpawithmybits.sample.git
+	<<<<<<< HEAD
+			[...] 테스트롤백 적용
+			[...] dockerfile 적용
+	=======
+			[...] 테스트롤백 적용---
+	>>>>>>> branch 'main' of https://github.com/yongtae/com.jpawithmybits.sample.git
 		[완] 검증 api 생성, 참고파일: jpa+mybatis 동시 적용 확인.postman_collection.json 
 		[완] github에 등록
 		[완] 인메모리 hsqldb, hsqldb server 둘다 연결 가능 셋팅
