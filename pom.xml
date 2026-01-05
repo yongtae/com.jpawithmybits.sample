@@ -5,7 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.egovframe.template</groupId>
 	<artifactId>simpleHomePage</artifactId>
+	<!-- 
 	<packaging>jar</packaging>
+	-->
+	<!-- 쿠버네티스 배포 테스트 -->
+	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>egovframework</name>
 	<url>example.egovframework.com</url>
