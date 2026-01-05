@@ -1,0 +1,32 @@
+# 빌드 시 넘어올 수 있는 인자 설정
+# 사용명령어, $ docker build --build-arg jarfile=test-0.0.1-SNAPSHOT.jar
+ARG jarfile
+
+
+# 기본 이미지 지정
+# Ubuntu 이미지 설정 
+# FROM ubuntu
+
+# Java 설정 
+# FROM java:8 -> 에러발생함
+FROM openjdk:8
+
+# 라벨 설정
+LABEL msa.customer 마이크로서비스 프로젝트
+LABEL version="1.0"
+
+# 컨테이너가 리스닝할 포트 및 프로토콜 설정
+EXPOSE 8082
+
+# 이미지의 파일 시스템에 추가함.
+ADD ./target/msa.customer-0.0.1-SNAPSHOT.jar msa.customer.jar
+
+# jar 파일을 실행
+ENTRYPOINT ["java","-jar","msa.customer.jar"]
+
+# 볼륨 마운트
+# VOLUME <경로>
+
+
+
+
