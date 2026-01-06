@@ -2,7 +2,6 @@
 # 사용명령어, $ docker build --build-arg jarfile=test-0.0.1-SNAPSHOT.jar
 ARG jarfile
 
-
 # 기본 이미지 지정
 # Ubuntu 이미지 설정 
 # FROM ubuntu

@@ -5,7 +5,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.egovframe.template</groupId>
 	<artifactId>simpleHomePage</artifactId>
-	
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
 	<name>egovframework</name>
@@ -71,24 +70,18 @@
 		<!-- spring boot dependency start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>		     
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId> 
-			<!-- <scope>provided</scope> -->
+			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
-	    <dependency>
-	        <groupId>org.apache.logging.log4j</groupId>
-	        <artifactId>log4j-to-slf4j</artifactId>
-	        <!-- <scope>provided</scope>  -->
-	    </dependency>
+		<!-- spring boot dependency end -->
 
 		<dependency>
 			<groupId>org.egovframe.rte</groupId>
@@ -302,6 +295,13 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<!-- 실행가능 jar 플러그인
+				에러발생시 'maven install' 명령어 실행(.m2 리포지터리 최신화)
+			-->
+			<plugin>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-maven-plugin</artifactId>
+	        </plugin>
 			<!-- EMMA -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
