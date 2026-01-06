@@ -5,11 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.egovframe.template</groupId>
 	<artifactId>simpleHomePage</artifactId>
-	<!-- 
+	
 	<packaging>jar</packaging>
-	-->
-	<!-- 쿠버네티스 배포 테스트 -->
-	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>egovframework</name>
 	<url>example.egovframework.com</url>
@@ -74,18 +71,24 @@
 		<!-- spring boot dependency start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>		     
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
+			<artifactId>tomcat-embed-jasper</artifactId> 
+			<!-- <scope>provided</scope> -->
 		</dependency>
-		<!-- spring boot dependency end -->
+	    <dependency>
+	        <groupId>org.apache.logging.log4j</groupId>
+	        <artifactId>log4j-to-slf4j</artifactId>
+	        <!-- <scope>provided</scope>  -->
+	    </dependency>
 
 		<dependency>
 			<groupId>org.egovframe.rte</groupId>
