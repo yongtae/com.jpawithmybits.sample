@@ -16,5 +16,6 @@ public interface SampleService {
 	 */
 	void sampleLogic() throws Exception;
 	void sampleLogic2() throws Exception;
+	void sampleLogic3() throws Exception;
 
 }

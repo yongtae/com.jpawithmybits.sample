@@ -41,6 +41,17 @@ public class SampleServiceImpl implements SampleService {
 		SampleResultVO.getSampleResultVO().setResultcode(cnt2);
 		
 	}
+	
+	@Transactional
+	@Override
+	public void sampleLogic3() throws Exception {
+		
+		int cnt2 = userInfDAO.selectTestUsersCnt();
+		System.out.println("userInfDAO.selectTestUsersCnt()---"+ cnt2);
+//		값 저장
+		SampleResultVO.getSampleResultVO().setResultcode(cnt2);
+		
+	}
 
 
 }

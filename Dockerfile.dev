@@ -5,41 +5,57 @@
 ## $ docker build -f Dockerfile.dev -t tomcat9-app-war:v20260105-02 .
 
 #############################################
-# 1단계 maven 빌드
-# ...
+# [진행중] 1단계 maven 빌드 스테이지
+# 1. 빌드 환경 설정 (Java 및 Maven 포함 이미지)
+FROM maven:3.9.12-eclipse-temurin-21 AS build_stage
+WORKDIR /build
+
+# 2. 의존성 레이어 캐싱 (핵심!)
+# pom.xml기반 라이브러리를 다운로드합니다.
+# pom.xml이 변하지 않으면 이 단계는 재실행되지 않습니다.
+# docker_mvn_settings.xml사용, 전자정부 리포지토리 강제 연결
+COPY pom.xml .
+COPY docker_mvn_settings.xml ./settings.xml
+RUN mvn dependency:go-offline -B -s settings.xml
+
+
+# 3. 소스 코드 복사 및 패키징
+# 전체 소스를 복사한 뒤 실질적인 jar 파일을 생성합니다.
+COPY src ./src
+# 설정 변경, globals_kube.properties -> globals.properties 복사
+RUN cp -r ./src/main/resources/egovframework/egovProps/globals_kube.properties ./src/main/resources/egovframework/egovProps/globals.properties 
+RUN mvn clean package -DskipTests -B -s settings.xml
+
 
 #############################################
-# 2단계 톰캣 이미지 생성
+#############################################
+# 2단계 jar 실행 스테이지
 
 # 기본 이미지 지정 - (가장 가볍고 안정적)
 FROM eclipse-temurin:21-alpine-3.23
-
-# 라벨 설정
-LABEL project_name=jpawithmybits_프로젝트
-LABEL version="1.0"
+WORKDIR /app
 
 # 컨테이너가 리스닝할 포트 및 프로토콜 설정
 EXPOSE 8080
 
 # 이미지의 파일 시스템에 추가함.
-ADD ./target/sht_webapp.jar sht_webapp.jar
+COPY --from=build_stage /build/target/sht_webapp.jar sht_webapp.jar
 
 # 컨테이너 실행시, jar 파일을 실행
-# ENTRYPOINT ["java","-jar","sht_webapp.jar"]
+ENTRYPOINT ["java","-jar","sht_webapp.jar"]
 
+## 쿠버네티스 파드 유지 - 무한 대기 (디버깅용)
+#ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]
 
-##########################################
-# 빌드시 넘어올 수 있는 인자 설정
-# ARG jarfile
-# 사용예제
-## 선언된 변수를 사용 ($ 기호 사용)
-## COPY ${jarfile} app.jar
-
-# 컨테이너 실행시 톰캣 실행(변경불가)
-# ENTRYPOINT ["catalina.sh","run"]
-# 볼륨 마운트
-# VOLUME <경로>
+# 라벨 설정
+LABEL project_name=jpawithmybits_프로젝트
+LABEL version="1.0"
 
 
 
+########################################
+# 참고명령어
 
+#RUN mvn dependency:resolve -B -s settings.xml
+#RUN mvn dependency:resolve-plugins -B -s settings.xml
+#RUN mvn dependency:go-offline -B

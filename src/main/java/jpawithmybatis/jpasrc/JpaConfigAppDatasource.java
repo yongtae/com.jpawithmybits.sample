@@ -86,11 +86,14 @@ public class JpaConfigAppDatasource {
 	@Bean(name = {"dataSourceJpa"})
 	@Primary //해당 Bean을 우선적으로 선택하도록 하는 annotation
 	public DataSource dataSource() {
-//		인메모리 hsql 연결
-		return dataSourceHSQL();
-		
-//		hsql server 연결
-//		return basicDataSource();
+		if ("hsql".equals(dbType)) {
+//			인메모리 hsql 연결
+			return dataSourceHSQL();
+//			hsql server 연결
+//			return basicDataSource();
+		} else {
+			return basicDataSource();
+		}
 	}
 
 	private static final String DEFAULT_NAMING_STRATEGY
@@ -105,8 +108,17 @@ public class JpaConfigAppDatasource {
 	  Map<String, String> propertiesHashMap = new HashMap<>();
 	  propertiesHashMap.put("hibernate.physical_naming_strategy",DEFAULT_NAMING_STRATEGY);
 	  propertiesHashMap.put("hibernate.show_sql","true");
+	  propertiesHashMap.put("hibernate.format_sql", "true"); // 로그 가독성
+	  
 //	  엔터티 생성 셋팅, create(hsql server일떄만 사용)/none
-	  propertiesHashMap.put("hibernate.hbm2ddl.auto", "none"); 
+	  propertiesHashMap.put("hibernate.hbm2ddl.auto", "none");
+	  if ("hsql".equals(dbType)) {
+	   // 자동 인식
+	  } else {
+//		  배포후 문제 처리
+//		 원인: 보통 JPA는 접속 정보를 통해 Dialect를 자동 추론하지만, java -jar 환경에서는 접속 자체가 실패하면서 자동 추론도 불가능해집니다.
+		propertiesHashMap.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+	  }
 	  
 	  LocalContainerEntityManagerFactoryBean rep =
 	  builder.dataSource(dataSource())

@@ -181,4 +181,7 @@ public class EgovUserInfManageDAO extends EgovAbstractMapper {
     public int selectIdsTestCnt() throws Exception {
     	return (Integer)selectOne("EgovUserInfManageDAO.selectIdsTestCnt", null);
     }
+    public int selectTestUsersCnt() throws Exception {
+    	return (Integer)selectOne("EgovUserInfManageDAO.selectTestUsersCnt", null);
+    }
 }

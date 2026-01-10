@@ -112,5 +112,31 @@ public class SampleTestSrcControllerAPI {
 
 		return resultVO;
 	}
+	
+	/**
+	 * mybatis 기반, db 조회 확인
+	 */
+	@RequestMapping(value = "/sample/test_mybatis_postgres.do")
+	@ResponseBody
+	public ResultVO get03() throws Exception {
+		int cnt2 = 0;
+
+		
+		sampleService.sampleLogic3();
+		cnt2 = SampleResultVO.getSampleResultVO().getResultcode();
+	
+
+		ResultVO resultVO = new ResultVO();
+
+		HashedMap resultMap = new HashedMap();
+		resultMap.put("url", "/sample/test_mybatis_postgres.do");
+		resultMap.put("select test_users", cnt2);
+
+		resultVO.setResult(resultMap);
+		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
+		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
+
+		return resultVO;
+	}
 
 }

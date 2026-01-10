@@ -1,0 +1,44 @@
+
+# 실행 명령어 
+## $ docker build --build-arg jarfile=test-0.0.1-SNAPSHOT.jar
+## $ docker build -f Dockerfile.dev -t tomcat9-app-war:v20260105-01 .
+## $ docker build -f Dockerfile.dev -t tomcat9-app-war:v20260105-02 .
+
+#############################################
+# 1단계 maven 빌드
+# ...
+
+#############################################
+# 2단계 톰캣 이미지 생성
+
+# 기본 이미지 지정 - (가장 가볍고 안정적)
+FROM eclipse-temurin:21-alpine-3.23
+WORKDIR /app
+
+# 컨테이너가 리스닝할 포트 및 프로토콜 설정
+EXPOSE 8080
+
+# 이미지의 파일 시스템에 추가함.
+ADD ./target/sht_webapp.jar sht_webapp.jar
+
+# 컨테이너 실행시, jar 파일을 실행
+ENTRYPOINT ["java","-jar","sht_webapp.jar"]
+
+# 라벨 설정
+LABEL project_name=jpawithmybits_프로젝트
+LABEL version="1.0"
+
+##########################################
+# 빌드시 넘어올 수 있는 인자 설정
+# ARG jarfile
+# 사용예제
+## 선언된 변수를 사용 ($ 기호 사용)
+## COPY ${jarfile} app.jar
+
+# 컨테이너 실행시 톰캣 실행(변경불가)
+# ENTRYPOINT ["catalina.sh","run"]
+# 볼륨 마운트
+# VOLUME <경로>
+
+
+
